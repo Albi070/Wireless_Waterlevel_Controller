@@ -1,4 +1,4 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "Serial_hc12_test\\Serial_hc12_test.ino"
+    "sketch": "water_motor_HC12\\water_motor_HC12.ino"
 }

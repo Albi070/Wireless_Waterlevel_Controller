@@ -49,6 +49,147 @@ struct motorStruct
   int state;
 } motdata; //Struct for sending and storing motor status.
 
+void handlePower()
+{
+
+  if (motor_pwr == 1)
+  {
+    digitalWrite(motor, HIGH);
+  }
+  else
+  {
+    digitalWrite(motor, LOW);
+  }
+
+  if (current > set_current)
+  {
+    digitalWrite(motor, LOW);
+    motor_pwr = 0;
+    sendata.motor_pwr = 0;
+  }
+}
+
+void getMotorStat()
+{
+  for (int i = 0; i < 250; i++)
+  {
+    adc = analogRead(sensor);
+    if (max_current < adc)
+      max_current = adc;
+  }
+
+  max_current = max_current - 512;
+  current = (float)(((max_current / 1024) * 5000) * 1000) / 66;
+
+  if (current < 20000)
+    ; //under current
+
+  if (current > 60000)
+    ; //over current
+}
+
+
+void heartbeat()
+{
+int heart = LOW;
+static unsigned long previousMillis = 0;
+static unsigned long currentMillis = 0;
+  currentMillis = millis();
+  if (currentMillis - previousMillis >= interval)
+  {
+    if (heart == LOW)
+    {
+      digitalWrite(ledPin, LOW);
+      heart = HIGH;
+    }
+    else
+
+        if (heart = HIGH)
+    {
+      digitalWrite(ledPin, HIGH);
+      heart = LOW;
+    }
+    previousMillis = millis();
+  }
+}
+
+
+void process()
+{
+  for (int i = 0; i < a.length(); i++)
+  {
+    if (isAlpha(a.charAt(i)))
+    {
+      previousAlpha = currentAlpha;
+      currentAlpha = a.charAt(i);
+
+      if (previousAlpha == 'M')
+      {
+        sendata._micros = temp.toDouble();
+      }
+
+      if (previousAlpha == 'V')
+      {
+        sendata.value = temp.toDouble();
+      }
+
+      if (previousAlpha == 'L')
+      {
+        sendata.level = temp.toInt();
+      }
+
+      if (previousAlpha == 'P')
+      {
+        sendata.motor_pwr = temp.toInt();
+      }
+      temp = "";
+    }
+    else
+    {
+      temp += a.charAt(i);
+    }
+  }
+
+  level = sendata.level;
+
+  if (sendata.motor_pwr == 1)
+  {
+    motor_pwr = 1;
+  }
+
+  if (sendata.motor_pwr == false)
+  {
+    motor_pwr = 0;
+  }
+  motor_pwr = sendata.motor_pwr;
+}
+
+void receive()
+{
+static unsigned long previousMillis=0;
+static unsigned long currentMillis=0;
+static bool error=false;
+currentMillis=millis();
+  while (Serial.available())
+  {
+    a = Serial.readString();
+    previousMillis=currentMillis;
+  }
+
+  
+  if((currentMillis-previousMillis)>=1000){
+     error=true;
+      }
+  else{
+    error=false;}
+
+if(error==true)
+{sendata.motor_pwr=false;
+motor_pwr=false;
+  }
+  
+  
+}
 void setup()
 {
   pinMode(ledPinGnd, OUTPUT);
