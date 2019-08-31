@@ -8,12 +8,11 @@ created by ALBERT P JOSHI
 //For RADIO
 int conn_led = A5; //Led showing network connectivity
 
-
 //For message processing
 String a = "";
 String temp = "";
 char previousAlpha, currentAlpha;
-int l=0;
+int l = 0;
 
 //For Heart
 const int ledPin = A3;
@@ -88,12 +87,11 @@ void getMotorStat()
     ; //over current
 }
 
-
 void heartbeat()
 {
-int heart = LOW;
-static unsigned long previousMillis = 0;
-static unsigned long currentMillis = 0;
+  int heart = LOW;
+  static unsigned long previousMillis = 0;
+  static unsigned long currentMillis = 0;
   currentMillis = millis();
   if (currentMillis - previousMillis >= interval)
   {
@@ -112,7 +110,6 @@ static unsigned long currentMillis = 0;
     previousMillis = millis();
   }
 }
-
 
 void process()
 {
@@ -166,29 +163,30 @@ void process()
 
 void receive()
 {
-static unsigned long previousMillis=0;
-static unsigned long currentMillis=0;
-static bool error=false;
-currentMillis=millis();
+  static unsigned long previousMillis = 0;
+  static unsigned long currentMillis = 0;
+  static bool error = false;
+  currentMillis = millis();
   while (Serial.available())
   {
     a = Serial.readString();
-    previousMillis=currentMillis;
+    previousMillis = currentMillis;
   }
 
-  
-  if((currentMillis-previousMillis)>=1000){
-     error=true;
-      }
-  else{
-    error=false;}
-
-if(error==true)
-{sendata.motor_pwr=false;
-motor_pwr=false;
+  if ((currentMillis - previousMillis) >= 1000)
+  {
+    error = true;
   }
-  
-  
+  else
+  {
+    error = false;
+  }
+
+  if (error == true)
+  {
+    sendata.motor_pwr = false;
+    motor_pwr = false;
+  }
 }
 void setup()
 {
@@ -203,15 +201,6 @@ void setup()
   digitalWrite(ledPin, LOW);
 }
 
-
-
-
-
-
-
-
-
-
 void loop()
 {
   heartbeat();
@@ -220,5 +209,4 @@ void loop()
   process();
   getMotorStat();
   handlePower();
-
 }
