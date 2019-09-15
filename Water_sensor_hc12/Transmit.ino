@@ -18,6 +18,7 @@ currentMillis=millis();
  if (currentMillis - previousMillis >= transmitInterval)
   {
     Serial.println(a);
+    HC12.println(a);
     previousMillis = millis();
   }
   

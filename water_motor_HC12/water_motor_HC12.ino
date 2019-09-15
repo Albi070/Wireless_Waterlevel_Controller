@@ -4,6 +4,9 @@ created by ALBERT P JOSHI
 */
 
 #include <SPI.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial HC12(10, 8); // RX, TX
 
 //For RADIO
 int conn_led = A5; //Led showing network connectivity
@@ -89,7 +92,7 @@ void getMotorStat()
 
 void heartbeat()
 {
-  int heart = LOW;
+ static int heart = LOW;
   static unsigned long previousMillis = 0;
   static unsigned long currentMillis = 0;
   currentMillis = millis();
@@ -167,9 +170,10 @@ void receive()
   static unsigned long currentMillis = 0;
   static bool error = false;
   currentMillis = millis();
-  while (Serial.available())
+  while (HC12.available())
   {
-    a = Serial.readString();
+    Serial.println("REceiving");
+    a = HC12.readString();
     previousMillis = currentMillis;
   }
 
