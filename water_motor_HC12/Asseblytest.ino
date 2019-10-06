@@ -8,5 +8,5 @@ a=a+"L";
 a=a+sendata.level;
 a=a+"P";
 a=a+sendata.motor_pwr;
-
+//For checking received packets by assembling
 }
