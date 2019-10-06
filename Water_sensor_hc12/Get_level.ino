@@ -34,6 +34,6 @@ void getlevel(){
 
   if (wat_res < 140 || wat_res > 650)   //if probe not connected properly or incorrect values fed
   {
-    return 0;
+    level= 0;
   }
 }
