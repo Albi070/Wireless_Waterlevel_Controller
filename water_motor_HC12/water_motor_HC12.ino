@@ -1,12 +1,12 @@
 /*
-4rd eteration for Waterlevel controller
+3rd eteration for Waterlevel controller
 created by ALBERT P JOSHI
 */
 
 #include <SPI.h>
 #include <SoftwareSerial.h>
 
-SoftwareSerial HC12(10, 8); // RX, TX
+SoftwareSerial HC12(8, 10); // RX, TX
 
 //For RADIO
 int conn_led = A5; //Led showing network connectivity
@@ -171,19 +171,22 @@ void receive()
   static bool error = false;
   currentMillis = millis();
   while (HC12.available())
-  {
-    Serial.println("REceiving");
+  {Serial.println(a);
+   // Serial.println("REceiving");
     a = HC12.readString();
+    Serial.println(a);
     previousMillis = currentMillis;
   }
 
   if ((currentMillis - previousMillis) >= 1000)
   {
     error = true;
+        digitalWrite(conn_led,LOW);
   }
   else
   {
     error = false;
+        digitalWrite(conn_led,HIGH);
   }
 
   if (error == true)
@@ -199,7 +202,9 @@ void setup()
   pinMode(conn_led, OUTPUT);
   digitalWrite(ledPinGnd, LOW);
   Serial.begin(9600);
-  pinMode(sensor, INPUT);
+    HC12.begin(9600);
+
+      pinMode(sensor, INPUT);
   pinMode(motor, OUTPUT);
   digitalWrite(motor, LOW);
   digitalWrite(ledPin, LOW);

@@ -8,6 +8,7 @@ a=a+"L";
 a=a+sendata.level;
 a=a+"P";
 a=a+sendata.motor_pwr;
+a=a+"E";
 }
 
 void transmit(){
