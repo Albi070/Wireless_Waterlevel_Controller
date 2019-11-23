@@ -10,7 +10,6 @@ SoftwareSerial HC12(10, 8); // RX, TX
 
 
 //For WaterLevel
-int sensor = A0;
 int wat_res = 0;
 int level = 2;
 
@@ -20,8 +19,8 @@ String a;
 unsigned long transmitInterval=100;
 
 //HeartBeat to show that the circuit is executing the loop,blinks every 1 sec
-const int ledPin = A1;
-const int tempHeartGround = A2;
+const int ledPin = 4;
+const int tempHeartGround = 5;
 const short interval = 100;
 
 struct sensorStruct
@@ -39,7 +38,11 @@ void setup()
   Serial.begin(9600);
   sendata.value = 0.00;
   pinMode(ledPin, OUTPUT);
-  pinMode(sensor, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
+  pinMode(A4, INPUT);
+  pinMode(A5, INPUT);
   pinMode(tempHeartGround, OUTPUT);
   digitalWrite(tempHeartGround, LOW);
 
