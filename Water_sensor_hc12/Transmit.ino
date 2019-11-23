@@ -8,6 +8,7 @@ a=a+"L";
 a=a+sendata.level;
 a=a+"P";
 a=a+sendata.motor_pwr;
+a=a+"E";
 }
 
 void transmit(){
@@ -18,6 +19,7 @@ currentMillis=millis();
  if (currentMillis - previousMillis >= transmitInterval)
   {
     Serial.println(a);
+    HC12.println(a);
     previousMillis = millis();
   }
   

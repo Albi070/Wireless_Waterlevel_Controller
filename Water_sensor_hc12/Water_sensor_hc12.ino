@@ -6,7 +6,7 @@ created by ALBERT P JOSHI
 #include <SPI.h>
 #include <SoftwareSerial.h>
 
-SoftwareSerial HC12(10, 8); // RX, TX
+SoftwareSerial HC12(8, 10); // RX, TX
 
 
 //For WaterLevel
@@ -16,7 +16,7 @@ int level = 2;
 String a;
 
 //Transmission Details
-unsigned long transmitInterval=100;
+unsigned long transmitInterval=1500;
 
 //HeartBeat to show that the circuit is executing the loop,blinks every 1 sec
 const int ledPin = 4;
@@ -59,7 +59,7 @@ void process()
   {
     sendata.motor_pwr = 1; // @ major :: 
   }    
-  else if (level == 5)
+  else if (level == 4)
   { 
     sendata.motor_pwr = 0;
   }  
