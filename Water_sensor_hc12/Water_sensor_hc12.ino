@@ -59,7 +59,7 @@ void process()
   {
     sendata.motor_pwr = 1; // @ major :: 
   }    
-  else if (level == 4)
+  else if (level == 5)
   { 
     sendata.motor_pwr = 0;
   }  
