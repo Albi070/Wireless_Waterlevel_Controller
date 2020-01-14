@@ -19,9 +19,9 @@ String a;
 unsigned long transmitInterval=1500;
 
 //HeartBeat to show that the circuit is executing the loop,blinks every 1 sec
-const int ledPin = 4;
+const int ledPin = 2;
 const int tempHeartGround = 5;
-const short interval = 100;
+const short interval = 500;
 
 struct sensorStruct
 {
